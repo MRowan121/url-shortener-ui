@@ -2,8 +2,8 @@ import React from 'react';
 import Url from '../Url/Url';
 import './UrlContainer.css';
 
-const UrlContainer = props => {
-  const urlEls = props.urls.map(url => {
+const UrlContainer = ({ urls, deleteUrl }) => {
+  const urlEls = urls.map(url => {
     return (
       <Url 
         title={url.title}
@@ -11,6 +11,7 @@ const UrlContainer = props => {
         long_url={url['long_url']}
         key={url.id}
         id={url.id}
+        deleteUrl={deleteUrl}
       />
     )
   });

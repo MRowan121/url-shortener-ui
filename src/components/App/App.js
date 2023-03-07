@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { 
-  getUrls
+  getUrls,
+  deleteUrl
 } from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
@@ -21,8 +22,14 @@ export class App extends Component {
     })
   }
 
-  handleCallback = (newUrl) => {
+  addNewUrl = (newUrl) => {
     this.setState({ urls: [...this.state.urls, newUrl]})
+  }
+
+  removeUrlDisplay = (id) => {
+    const filteredUrls = this.state.urls.filter(url => url.id !== id);
+    this.setState({ urls: filteredUrls });
+    deleteUrl(id)
   }
 
   render() {
@@ -30,10 +37,10 @@ export class App extends Component {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm handleCallback={this.handleCallback} />
+          <UrlForm addNewUrl={this.addNewUrl} />
         </header>
 
-        <UrlContainer urls={this.state.urls}/>
+        <UrlContainer urls={this.state.urls} deleteUrl={this.removeUrlDisplay}/>
       </main>
     );
   }
