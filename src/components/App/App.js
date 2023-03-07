@@ -21,11 +21,8 @@ export class App extends Component {
     })
   }
 
-  handleCallback = () => {
-    getUrls()
-    .then(data => {
-      this.setState({ urls: data.urls })
-    })
+  handleCallback = (newUrl) => {
+    this.setState({ urls: [...this.state.urls, newUrl]})
   }
 
   render() {

@@ -2,7 +2,7 @@ import React from "react";
 
 const Url = ({ title, short_url, long_url, id}) => {
     return (
-        <div className="url" key={id}>
+        <div className="url" id={id}>
             <h3>{title}</h3>
             <a href={short_url} target="blank">{short_url}</a>
             <p>{long_url}</p>

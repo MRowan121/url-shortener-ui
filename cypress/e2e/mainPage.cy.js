@@ -10,7 +10,7 @@ describe('empty spec', () => {
   })
 
   it('should have an existing URL on display', () => {
-    cy.get('.url')
+    cy.get('#1')
     .should('be.visible')
   })
 
@@ -34,5 +34,21 @@ describe('empty spec', () => {
         .type('https://www.linkedin.com/in/mrowan121/')
         .should('have.value', 'https://www.linkedin.com/in/mrowan121/')
     })
+  })
+
+  it('should display a new URL after submission', () => {
+    cy.get('form').within(() => {
+      cy.get('input[name="title"]')
+        .type('My LinkedIn')
+        .should('have.value', 'My LinkedIn')
+      cy.get('input[name="urlToShorten"]')
+        .type('https://www.linkedin.com/in/mrowan121/')
+        .should('have.value', 'https://www.linkedin.com/in/mrowan121/')
+      cy.get('button')
+        .click()
+    })
+    cy.get('.urlContainer')
+      .children()
+      .should('have.length', 2)
   })
 })
