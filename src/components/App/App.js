@@ -21,13 +21,11 @@ export class App extends Component {
     })
   }
 
-  componentDidUpdate(prevState) {
-    if(prevState.urls !== this.state.urls) {
+  handleCallback = () => {
     getUrls()
-      .then(data => {
-        this.setState({ urls: data.urls })
-      })
-    }
+    .then(data => {
+      this.setState({ urls: data.urls })
+    })
   }
 
   render() {
@@ -35,7 +33,7 @@ export class App extends Component {
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm getUrls={this.getUrls} />
+          <UrlForm handleCallback={this.handleCallback} />
         </header>
 
         <UrlContainer urls={this.state.urls}/>
