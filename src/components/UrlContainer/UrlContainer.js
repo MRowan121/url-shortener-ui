@@ -2,8 +2,8 @@ import React from 'react';
 import Url from '../Url/Url';
 import './UrlContainer.css';
 
-const UrlContainer = ({ urls }) => {
-  const urlEls = urls.map(url => {
+const UrlContainer = props => {
+  const urlEls = props.urls.map(url => {
     return (
       <Url 
         title={url.title}

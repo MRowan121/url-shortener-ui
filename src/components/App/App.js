@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import { getUrls } from '../../apiCalls';
+import { 
+  getUrls
+} from '../../apiCalls';
 import UrlContainer from '../UrlContainer/UrlContainer';
 import UrlForm from '../UrlForm/UrlForm';
 
 export class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       urls: []
     }
@@ -19,12 +21,21 @@ export class App extends Component {
     })
   }
 
+  componentDidUpdate(prevState) {
+    if(prevState.urls !== this.state.urls) {
+    getUrls()
+      .then(data => {
+        this.setState({ urls: data.urls })
+      })
+    }
+  }
+
   render() {
     return (
       <main className="App">
         <header>
           <h1>URL Shortener</h1>
-          <UrlForm />
+          <UrlForm getUrls={this.getUrls} />
         </header>
 
         <UrlContainer urls={this.state.urls}/>
