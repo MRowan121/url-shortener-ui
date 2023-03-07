@@ -22,6 +22,7 @@ class UrlForm extends Component {
     if(this.state.title && this.state.urlToShorten) {
       addUrl(this.state.title, this.state.urlToShorten)
       this.clearInputs();
+      this.props.handleCallback()
     }
   }
 
